@@ -1,0 +1,25 @@
+
+datasource db {
+  provider = "sqlite"
+  url = "***"
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output = "../server/node_modules/.prisma/client"
+}
+
+model HDate {
+    id  Int @id @default(autoincrement())
+  Habit Habit @relation(fields: [habitId], references: [id])
+  habitId Int
+  at DateTime @default(now())
+  finished  Boolean @default(false)
+}
+
+model Habit {
+    id  Int @id @default(autoincrement())
+  name String @unique
+  hDates HDate[]
+}
+
