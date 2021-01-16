@@ -11,15 +11,14 @@ generator client {
 
 model HDate {
     id  Int @id @default(autoincrement())
-  Habit Habit @relation(fields: [habitId], references: [id])
-  habitId Int
+  Habit Habit @relation(fields: [habitName], references: [name])
+  habitName String
   at DateTime @default(now())
   finished  Boolean @default(false)
 }
 
 model Habit {
-    id  Int @id @default(autoincrement())
-  name String @unique
-  hDates HDate[]
+    name String @id
+  dates HDate[]
 }
 

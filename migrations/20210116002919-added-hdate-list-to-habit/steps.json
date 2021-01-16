@@ -4,14 +4,9 @@
     {
       "tag": "CreateField",
       "model": "Habit",
-      "field": "hDates",
+      "field": "dates",
       "type": "HDate",
       "arity": "List"
-    },
-    {
-      "tag": "DeleteField",
-      "model": "Habit",
-      "field": "hDate"
     }
   ]
 }

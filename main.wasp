@@ -7,18 +7,24 @@ page Main {
   component: import Main from "@ext/MainPage.js"
 }
 
-entity HDate {=psl
+entity Date {=psl
+  at DateTime @id
+  hDates HabitDate[]
+psl=}
+
+entity HabitDate {=psl
   id  Int @id @default(autoincrement())
-  Habit Habit @relation(fields: [habitId], references: [id])
-  habitId Int
-  at DateTime @default(now())
+  Habit Habit @relation(fields: [habitName], references: [name])
+  habitName String
+  Date Date @relation(fields: [dateAt], references: [at])
+  dateAt DateTime
   finished  Boolean @default(false)
+  @@index([habitName, dateAt])
 psl=}
 
 entity Habit {=psl
-  id  Int @id @default(autoincrement())
-  name String @unique
-  hDates HDate[]
+  name String @id
+  hDates HabitDate[]
 psl=}
 
 query getHabits {
@@ -26,12 +32,32 @@ query getHabits {
   entities: [Habit]
 }
 
-query getDates {
-  fn: import {getDates} from "@ext/queries.js",
-  entities: [HDate]
+query getHabitByName {
+  fn: import {getHabitByName} from "@ext/queries.js",
+  entities: [Habit]
 }
 
-action createHabit {
-  fn: import { createHabit } from "@ext/actions.js",
-  entities: [Habit]
+query getDates {
+  fn: import {getDates} from "@ext/queries.js",
+  entities: [Date]
+}
+
+query getDatesByMonth {
+  fn: import {getDatesByMonth} from "@ext/queries.js",
+  entities: [Date]
+}
+
+query getHabitDatesByMonth {
+  fn: import {getHabitDatesByMonth} from "@ext/queries.js",
+  entities: [HabitDate]
+}
+
+action createHabitDate {
+  fn: import { createHabitDate } from "@ext/actions.js",
+  entities: [HabitDate]
+}
+
+action createNewDate {
+  fn: import { createNewDate } from "@ext/actions.js",
+  entities: [HabitDate]
 }

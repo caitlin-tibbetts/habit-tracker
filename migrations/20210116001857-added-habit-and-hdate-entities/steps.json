@@ -2,6 +2,28 @@
   "version": "0.3.14-fixed",
   "steps": [
     {
+      "tag": "CreateSource",
+      "source": "db"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Source",
+        "source": "db"
+      },
+      "argument": "provider",
+      "value": "\"sqlite\""
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Source",
+        "source": "db"
+      },
+      "argument": "url",
+      "value": "\"***\""
+    },
+    {
       "tag": "CreateModel",
       "model": "HDate"
     },
@@ -47,6 +69,59 @@
       },
       "argument": "",
       "value": "autoincrement()"
+    },
+    {
+      "tag": "CreateField",
+      "model": "HDate",
+      "field": "Habit",
+      "type": "Habit",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "HDate",
+          "field": "Habit"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "HDate",
+          "field": "Habit"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[habitName]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "HDate",
+          "field": "Habit"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[name]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "HDate",
+      "field": "habitName",
+      "type": "String",
+      "arity": "Required"
     },
     {
       "tag": "CreateField",
@@ -119,49 +194,6 @@
     {
       "tag": "CreateField",
       "model": "Habit",
-      "field": "id",
-      "type": "Int",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Habit",
-          "field": "id"
-        },
-        "directive": "id"
-      }
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Habit",
-          "field": "id"
-        },
-        "directive": "default"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Habit",
-          "field": "id"
-        },
-        "directive": "default"
-      },
-      "argument": "",
-      "value": "autoincrement()"
-    },
-    {
-      "tag": "CreateField",
-      "model": "Habit",
       "field": "name",
       "type": "String",
       "arity": "Required"
@@ -174,15 +206,8 @@
           "model": "Habit",
           "field": "name"
         },
-        "directive": "unique"
+        "directive": "id"
       }
-    },
-    {
-      "tag": "CreateField",
-      "model": "Habit",
-      "field": "hDate",
-      "type": "HDate",
-      "arity": "List"
     }
   ]
 }

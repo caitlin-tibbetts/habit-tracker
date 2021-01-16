@@ -1,6 +1,7 @@
 # Prisma Migrate lockfile v1
 
-20210113191845-added-habit-and-hdate-entities
-20210113192213-added-habit-and-hdate-entities
-20210113193913-updated-hdate-entity
-20210113195618-updated-habit-entity
+20210116001857-added-habit-and-hdate-entities
+20210116002919-added-hdate-list-to-habit
+20210116004951-added-date--habit-date--and-habit-entities
+20210116010258-added-index-to-habit-date
+20210116041922-took-default-off-of-date-to-avoid-using-the-time
